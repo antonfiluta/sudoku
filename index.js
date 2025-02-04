@@ -1,5 +1,4 @@
 const body = document.body;
-var audio = new Audio();
 
 const globals = {
     levels: ["5x5", "10x10", "15x15", "random", "last game"],
@@ -15,9 +14,8 @@ const globals = {
             svg: `<svg fill="currentcolor" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50"><path d="M 3 9 A 1.0001 1.0001 0 1 0 3 11 L 47 11 A 1.0001 1.0001 0 1 0 47 9 L 3 9 z M 3 24 A 1.0001 1.0001 0 1 0 3 26 L 47 26 A 1.0001 1.0001 0 1 0 47 24 L 3 24 z M 3 39 A 1.0001 1.0001 0 1 0 3 41 L 47 41 A 1.0001 1.0001 0 1 0 47 39 L 3 39 z"></path></svg>`,
             unavailable: true,
             func: () => {
-                audio.src = 'assets/sounds/menu1.mp3';
-                audio.volume = 0.7;
-                if (globals.canPlay) audio.play()
+                game_data.level = 0;
+                game_data.game = 0;
                 if (document.getElementById("winwindow__wrapper")) document.getElementById("winwindow__wrapper").remove();
                 if (document.getElementById("game__wrapper")) document.getElementById("game__wrapper").remove();
                 document.getElementById("header__wrapper").remove();
@@ -35,17 +33,11 @@ const globals = {
             func: () => {
                 const but = document.getElementById("theme");
                 if (globals.what_theme === "dark") {
-                    audio.src = 'assets/sounds/theme2.mp3';
-                    audio.volume = 0.7;
-                    if (globals.canPlay) audio.play()
                     but.innerHTML = `<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="64.000000pt" height="64.000000pt" viewBox="0 0 64.000000 64.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" fill="currentcolor" stroke="none"><path d="M294 617 c-3 -9 -4 -28 -2 -44 2 -22 8 -28 28 -28 23 0 25 4 25 40 0 34 -3 40 -23 43 -13 2 -24 -3 -28 -11z" /><path d="M100 535 c-18 -22 13 -67 43 -63 31 4 34 42 5 62 -28 20 -32 20 -48 1z" /><path d="M492 534 c-29 -20 -26 -58 5 -62 30 -4 61 41 43 63 -16 19 -20 19 -48 -1z" /><path d="M242 451 c-96 -61 -96 -202 0 -261 20 -12 51 -20 78 -20 142 0 203 170 96 269 -37 35 -127 41 -174 12z m143 -66 c19 -18 25 -35 25 -65 0 -56 -34 -90 -90 -90 -30 0 -47 6 -65 25 -19 18 -25 35 -25 65 0 56 34 90 90 90 30 0 47 -6 65 -25z" /><path d="M14 336 c-12 -31 4 -47 43 -44 33 3 38 6 38 28 0 22 -5 25 -38 28 -26 2 -39 -1 -43 -12z" /><path d="M544 336 c-12 -31 4 -47 43 -44 33 3 38 6 38 28 0 22 -5 25 -38 28 -26 2 -39 -1 -43 -12z" /><path d="M104 145 c-16 -24 -16 -28 -1 -42 14 -15 18 -15 42 1 18 12 25 24 23 39 -5 33 -43 34 -64 2z" /><path d="M477 163 c-15 -14 -6 -43 19 -59 23 -16 27 -16 41 -1 15 14 15 18 -1 41 -16 25 -45 34 -59 19z" /><path d="M294 87 c-3 -9 -4 -28 -2 -44 2 -22 8 -28 28 -28 23 0 25 4 25 40 0 34 -3 40 -23 43 -13 2 -24 -3 -28 -11z" /></g></svg>`;
                     globals.what_theme = "light";
                     document.documentElement.style.setProperty("--accent-color", "#21201f");
                     body.style.background = "linear-gradient(40deg,rgb(246, 230, 196), #fbf0d8 )";
                 } else {
-                    audio.src = 'assets/sounds/gay-echo.mp3';
-                    audio.volume = 0.7;
-                    if (globals.canPlay) audio.play()
                     but.innerHTML = `<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="64.000000pt" height="64.000000pt" viewBox="0 0 64.000000 64.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" fill="currentcolor" stroke="none"><path d="M215 617 c-113 -45 -182 -127 -205 -245 -18 -95 18 -207 89 -276 182 -175 483 -80 530 168 11 59 -1 67 -42 28 -107 -103 -276 -72 -338 63 -35 76 -16 178 45 234 14 14 26 28 26 33 0 12 -70 8 -105 -5z m9 -72 c-21 -42 -25 -61 -22 -116 5 -85 42 -150 113 -194 43 -26 57 -30 124 -30 61 0 84 4 115 23 21 13 40 21 42 19 10 -9 -51 -110 -84 -138 -110 -97 -283 -95 -385 4 -57 56 -80 108 -85 189 -6 90 17 155 74 213 36 38 122 91 131 81 1 -1 -9 -24 -23 -51z"/></g></svg>`;
                     globals.what_theme = "dark";
                     document.documentElement.style.setProperty("--accent-color", "#fbf0d8");
@@ -59,10 +51,6 @@ const globals = {
             svg: `<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="64.000000pt" height="64.000000pt" viewBox="0 0 64.000000 64.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" fill="currentcolor" stroke="none"><path d="M224 616 c-115 -36 -209 -151 -216 -266 -4 -56 18 -66 27 -13 12 76 38 128 90 180 102 101 238 109 360 22 l48 -34 -44 -5 c-78 -9 -41 -36 54 -39 l38 -1 -3 67 c-2 42 -8 68 -15 71 -9 2 -13 -8 -13 -32 l0 -36 -45 35 c-79 60 -189 80 -281 51z"/><path d="M600 302 c0 -86 -77 -197 -165 -238 -98 -46 -237 -23 -304 50 l-24 26 41 0 c31 0 42 4 42 15 0 20 -128 22 -135 3 -7 -21 9 -118 20 -121 6 -1 11 13 13 31 l3 32 33 -25 c162 -123 388 -71 476 110 30 62 40 145 16 145 -11 0 -16 -9 -16 -28z"/></g></svg>`,
             unavailable: true,
             func: () => {
-                var audio1 = new Audio();
-                audio1.src = 'assets/sounds/reset.mp3';
-                audio1.volume = 0.7;
-                if (globals.canPlay) audio1.play()
                 if (document.getElementById("game__wrapper")) document.getElementById("game__wrapper").remove();
                 if (document.getElementById("winwindow__wrapper")) document.getElementById("winwindow__wrapper").remove();
                 build_game();
@@ -77,10 +65,6 @@ const globals = {
             svg: `<svg fill="currentcolor" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50"><path d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"></path></svg>`,
             unavailable: true,
             func: () => {
-                audio.src = 'assets/sounds/solution1.mp3';
-                audio.volume = 0.7;
-                if (globals.canPlay) audio.play()
-
                 const picture = globals.pictures[game_data.level][game_data.game];
 
                 for (let q = 0; q < picture.length; q++) {
@@ -111,9 +95,6 @@ const globals = {
             svg: `<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="50.000000pt" height="50.000000pt" viewBox="0 0 50.000000 50.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,50.000000) scale(0.100000,-0.100000)" fill="currentcolor" stroke="none"><path d="M44 447 c-2 -7 -3 -100 -2 -207 l3 -195 205 0 205 0 3 164 3 165 -43 43 -42 43 -163 0 c-124 0 -165 -3 -169 -13z m78 -79 l3 -73 120 0 120 0 3 69 3 69 34 -33 35 -34 0 -153 0 -153 -30 0 -29 0 -3 88 -3 87 -125 0 -125 0 -3 -87 -3 -88 -29 0 -30 0 0 190 0 190 30 0 29 0 3 -72z m228 7 l0 -65 -105 0 -105 0 0 65 0 65 105 0 105 0 0 -65z m10 -235 l0 -80 -110 0 -110 0 0 80 0 80 110 0 110 0 0 -80z"/><path d="M80 90 c0 -5 5 -10 10 -10 6 0 10 5 10 10 0 6 -4 10 -10 10 -5 0 -10 -4 -10 -10z"/><path d="M400 90 c0 -5 5 -10 10 -10 6 0 10 5 10 10 0 6 -4 10 -10 10 -5 0 -10 -4 -10 -10z"/><path d="M280 375 c0 -41 2 -45 25 -45 23 0 25 4 25 45 0 41 -2 45 -25 45 -23 0 -25 -4 -25 -45z m27 -12 c-3 -10 -5 -4 -5 12 0 17 2 24 5 18 2 -7 2 -21 0 -30z"/></g></svg>`,
             unavailable: true,
             func: () => {
-                audio.src = 'assets/sounds/save1.mp3';
-                audio.volume = 0.7;
-                if (globals.canPlay) audio.play()
                 localStorage.setItem('copy', JSON.stringify(game_data));
                 build_massage("Succesfully saved!")
             }
@@ -122,45 +103,17 @@ const globals = {
             title: "liderbord",
             svg: `<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="64.000000pt" height="64.000000pt" viewBox="0 0 64.000000 64.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" fill="currentcolor" stroke="none"><path d="M289 610 c-20 -26 -27 -29 -60 -24 -20 3 -39 2 -42 -3 -3 -5 -1 -28 4 -52 7 -31 6 -47 -2 -57 -9 -11 -8 -18 1 -29 10 -12 38 -15 129 -15 124 0 148 8 130 41 -6 12 -6 33 0 61 5 23 7 46 4 51 -3 5 -22 6 -42 3 -33 -5 -40 -2 -60 24 -12 17 -26 30 -31 30 -5 0 -19 -13 -31 -30z m49 -60 c7 -12 23 -20 38 -20 21 0 25 -4 22 -22 -3 -22 -8 -23 -78 -23 -70 0 -75 1 -78 23 -3 18 1 22 22 22 15 0 31 8 38 20 7 11 15 20 18 20 3 0 11 -9 18 -20z"/><path d="M223 383 c-10 -3 -13 -51 -13 -188 0 -157 2 -184 16 -189 20 -8 168 -8 188 0 14 5 16 31 16 189 0 158 -2 184 -16 189 -19 7 -173 7 -191 -1z m167 -188 l0 -145 -70 0 -70 0 0 145 0 145 70 0 70 0 0 -145z"/><path d="M12 308 c-17 -17 -17 -279 0 -296 14 -14 136 -16 156 -4 9 7 12 45 10 158 l-3 149 -75 3 c-50 2 -79 -1 -88 -10z m128 -148 l0 -110 -45 0 -45 0 0 110 0 110 45 0 45 0 0 -110z"/><path d="M467 263 c-4 -3 -7 -61 -7 -129 0 -102 3 -123 16 -128 28 -11 140 -6 152 6 13 13 17 212 6 242 -5 13 -22 16 -83 16 -43 0 -81 -3 -84 -7z m123 -123 l0 -90 -45 0 -45 0 0 90 0 90 45 0 45 0 0 -90z"/></g></svg>`,
             unavailable: false,
-            func: () => {
-                audio.src = 'assets/sounds/leaders.mp3';
-                audio.volume = 0.3;
-                if (globals.canPlay) audio.play()
-
-                build_leaderboard()
-            }
+            func: () => build_leaderboard()
         },
         {
             title: "quations",
             svg: `<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="64.000000pt" height="64.000000pt" viewBox="0 0 64.000000 64.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" fill="currentcolor" stroke="none"><path d="M225 616 c-57 -26 -112 -105 -99 -141 7 -17 39 -29 54 -20 6 4 19 24 30 45 47 92 173 93 216 2 23 -49 11 -81 -58 -148 -66 -65 -88 -104 -88 -159 0 -35 1 -36 31 -33 28 3 33 8 45 47 9 31 31 63 72 105 71 73 84 95 84 150 1 52 -22 97 -69 133 -31 24 -47 28 -112 31 -49 1 -87 -3 -106 -12z"/><path d="M280 71 c-16 -31 4 -63 37 -59 34 4 52 32 37 56 -16 26 -60 28 -74 3z"/></g></svg>`,
             unavailable: false,
-            func: () => {
-                audio.src = 'assets/sounds/quat.mp3';
-                audio.volume = 0.7;
-                if (globals.canPlay) audio.play()
-
-                build_quations()
-            }
-        },
-        {
-            title: "sound",
-            svg: `<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="32.000000pt" height="32.000000pt" viewBox="0 0 32.000000 32.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,32.000000) scale(0.100000,-0.100000)" fill="currentcolor" stroke="none"><path d="M120 265 c-32 -26 -67 -45 -85 -47 -29 -3 -30 -4 -30 -58 0 -54 1-55 30 -58 17 -2 55 -23 87 -48 31 -24 59 -44 62 -44 3 0 6 68 6 150 0 83 -3 150 -7 150 -5 -1 -33 -21 -63 -45z m48 -161 l-3 -56 -37 29 c-35 26 -37 31-37 83 0 52 2 57 37 83 l37 29 3 -56 c2 -31 2 -81 0 -112z m-108 56 c0 -33 -3-40 -20 -40 -17 0 -20 7 -20 40 0 33 3 40 20 40 17 0 20 -7 20 -40z"/><path d="M260 258 c0 -6 8 -20 17 -30 23 -25 23 -111 0 -136 -18 -20 -23 -42-9 -42 15 0 52 78 52 110 0 18 -10 50 -22 71 -21 38 -38 50 -38 27z"/><path d="M230 228 c0 -9 5 -20 10 -23 6 -3 10 -24 10 -45 0 -21 -4 -42 -10-45 -5 -3 -10 -14 -10 -23 0 -14 3 -13 21 5 30 29 30 97 0 126 -18 18 -21 19-21 5z"/></g></svg>`,
-            unavailable: false,
-            func: () => {
-                globals.canPlay = !globals.canPlay;
-                audio.volume = 0
-                const icon = document.getElementsByClassName("buttons__box")[0].getElementsByTagName("button")[7];
-                icon.innerHTML = globals.canPlay ? `<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="32.000000pt" height="32.000000pt" viewBox="0 0 32.000000 32.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,32.000000) scale(0.100000,-0.100000)" fill="currentcolor" stroke="none"><path d="M120 265 c-32 -26 -67 -45 -85 -47 -29 -3 -30 -4 -30 -58 0 -54 1-55 30 -58 17 -2 55 -23 87 -48 31 -24 59 -44 62 -44 3 0 6 68 6 150 0 83 -3 150 -7 150 -5 -1 -33 -21 -63 -45z m48 -161 l-3 -56 -37 29 c-35 26 -37 31-37 83 0 52 2 57 37 83 l37 29 3 -56 c2 -31 2 -81 0 -112z m-108 56 c0 -33 -3-40 -20 -40 -17 0 -20 7 -20 40 0 33 3 40 20 40 17 0 20 -7 20 -40z"/><path d="M260 258 c0 -6 8 -20 17 -30 23 -25 23 -111 0 -136 -18 -20 -23 -42-9 -42 15 0 52 78 52 110 0 18 -10 50 -22 71 -21 38 -38 50 -38 27z"/><path d="M230 228 c0 -9 5 -20 10 -23 6 -3 10 -24 10 -45 0 -21 -4 -42 -10-45 -5 -3 -10 -14 -10 -23 0 -14 3 -13 21 5 30 29 30 97 0 126 -18 18 -21 19-21 5z"/></g></svg>` : '<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="32.000000pt" height="32.000000pt" viewBox="0 0 32.000000 32.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,32.000000) scale(0.100000,-0.100000)" fill="currentcolor" stroke="none"><path d="M126 275 c-43 -32 -69 -45 -93 -45 l-33 0 0 -70 0 -70 33 0 c24 0 50-13 93 -45 32 -24 62 -45 67 -45 4 0 7 72 7 160 0 88 -3 160 -7 160 -5 0 -35-21 -67 -45z m54 -115 l0 -130 -50 37 c-50 37 -50 38 -50 93 0 55 1 56 48 92 26 20 48 37 50 37 1 1 2 -58 2 -129z m-120 0 c0 -43 -3 -50 -20 -50 -17 0 -20 7 -20 50 0 43 3 50 20 50 17 0 20 -7 20 -50z"/><path d="M240 205 c0 -3 6 -14 12 -25 10 -16 10 -24 0 -41 -17 -27 -5 -40 14-15 14 20 14 20 28 0 19 -25 31 -12 14 15 -11 17 -11 25 0 42 18 28 5 40 -14 14 -14 -19 -16 -19 -25 -2 -9 16 -29 24 -29 12z"/></g></svg>'
-            }
+            func: () => build_quations()
         }
     ],
     menu_functions: {
         play: () => {
-            var audio1 = new Audio();
-            audio1.src = 'assets/sounds/click7.mp3';
-            audio1.volume = 0.7;
-            audio1.preload = 'auto';
-            if (globals.canPlay) audio1.play()
             document.getElementById("menu__wrapper").remove();
             if (game_data.level === 3) {
                 game_data.level = Math.floor(Math.random() * 2);
@@ -168,18 +121,14 @@ const globals = {
             } else if (game_data.level === 4) {
                 globals.isDownloaded = true;
             }
-            build_game();
             const buttons = document.getElementsByClassName("buttons__box")[0].getElementsByTagName("button");
+            buttons[0].classList.remove("unavailable");
+            build_game();  
             for (let i = 0; i < 7; i++) {
                 buttons[i].classList.remove("unavailable");
             }
         },
         choose_level: (n, isCreated = true) => {
-            var audio2 = new Audio();
-            audio2.src = 'assets/sounds/click2.mp3';
-            audio2.volume = 0.7;
-            audio2.preload = 'auto';
-            if (globals.canPlay) audio2.play();
             const html_levels = document.getElementsByClassName("levels__wrapper")[0].getElementsByTagName("button");
             html_levels[game_data.level].classList.remove("active");
             html_levels[n].classList.add("active")
@@ -197,20 +146,8 @@ const globals = {
             html_games[game_data.game].classList.remove("active");
             html_games[n].classList.add("active");
             game_data.game = n;
-            var audio1 = new Audio();
-            audio1.src = 'assets/sounds/click5.mp3';
-            audio1.volume = 0.7;
-            audio1.preload = 'auto';
-            if (globals.canPlay) audio1.play()
         },
-        menu_back: () => {
-            var audio2 = new Audio();
-            document.getElementById("carusel").classList.remove("scrolled");
-            audio2.src = 'assets/sounds/click6.mp3';
-            audio2.volume = 0.7;
-            audio2.preload = 'auto';
-            if (globals.canPlay) audio2.play()
-        }
+        menu_back: () => document.getElementById("carusel").classList.remove("scrolled")
     },
     pictures: [//в нем лежат три массива с уровнями 5,10,15
         [//5x5
@@ -754,7 +691,7 @@ const globals = {
 
 let game_data = {
     level: 0,
-    game: 1,
+    game: 0,
     picture_data: [],
     picture_area: [],
     time: 0
@@ -779,14 +716,6 @@ const build_header = () => {
         if (obj.unavailable) button.classList.add("unavailable");
         if (obj.id) button.id = obj.title;
         button.addEventListener("click", obj.func);
-        button.addEventListener("click", () => {
-            var audio1 = new Audio();
-            audio1.src = 'assets/sounds/click1.mp3';
-            audio1.volume = 0.7;
-            audio1.preload = 'auto';
-            if (globals.canPlay) audio1.play()
-        });
-
         buttons__box.append(button);
     }
 
@@ -852,11 +781,6 @@ const build_menu = () => {
 }
 
 const build_game = () => {
-    audio.src = game_data.level === 0 ? 'assets/sounds/easy.mp3' : game_data.level === 1 ? 'assets/sounds/medium.mp3' : 'assets/sounds/hard.mp3';
-    audio.volume = 0.7;
-    audio.preload = 'auto';
-    if (globals.canPlay) audio.play()
-
     const game__wrapper = document.createElement("div");
     const game__box = document.createElement("div");
     const timer = document.createElement("div");
@@ -934,6 +858,10 @@ const build_game = () => {
                             event.target.innerHTML = "";
                             fill_cell(q, w, e, r, picture, 1);
                         }
+                        const audio = new Audio();
+                        audio.src = "assets/sounds/click1.mp3";
+                        audio.volume = '0.7';
+                        audio.play()
                         event.target.innerHTML = "";
                     })
 
@@ -946,6 +874,10 @@ const build_game = () => {
                             event.target.innerHTML = "x";
                             fill_cell(q, w, e, r, picture, "x");
                         }
+                        const audio = new Audio();
+                        audio.src = "assets/sounds/click2.mp3";
+                        audio.volume = '0.7';
+                        audio.play()
                         event.target.classList.remove("filled");
                     })
 
@@ -1032,29 +964,20 @@ const build_game = () => {
 }
 
 const fill_cell = (q, w, e, r, picture, value) => {
-    var audio1 = new Audio();
-
     switch (value) {
         case 0:
             game_data.picture_data[q][w][e][r] = 0;
             game_data.picture_area[q][w][e][r] = 0;
-            audio1.src = 'assets/sounds/click6.mp3';
             break;
         case 1:
             game_data.picture_data[q][w][e][r] = 1;
             game_data.picture_area[q][w][e][r] = 1;
-            audio1.src = 'assets/sounds/click2.mp3';
             break;
         case "x":
             game_data.picture_data[q][w][e][r] = 0;
             game_data.picture_area[q][w][e][r] = "x";
-            audio1.src = 'assets/sounds/click5.mp3';
             break;
     }
-
-    audio1.volume = 0.7;
-    audio1.preload = 'auto';
-    if (globals.canPlay) audio1.play()
 
     if (!globals.isStarted) {
         globals.isStarted = true;
@@ -1090,10 +1013,6 @@ const stop_game = () => {
 }
 
 const build_winwindow = (result) => {
-    audio.src = 'assets/sounds/win.mp3';
-    audio.volume = 0.7;
-    audio.preload = 'auto';
-    if (globals.canPlay) audio.play();
     const winwindow__wrapper = document.createElement("div");
     const winwindow__box = document.createElement("div");
     const h2 = document.createElement("h2");
@@ -1132,8 +1051,8 @@ const build_losewindow = (result) => {
     winwindow__box.classList.add("winwindow__box");
     table.classList.add("cells_table")
 
-    h2.innerText = "ah, man..."
-    p.innerHTML = `You spent ${Math.floor(++game_data.time / 600)}${Math.floor(game_data.time / 60) % 10}:${Math.floor(game_data.time % 60 / 10)}${game_data.time % 10} time<br> to draw a ${globals.games[game_data.level][game_data.game]} <br> and lose...`;
+    h2.innerText = "failed"
+    p.innerHTML = `You spent ${Math.floor(++game_data.time / 600)}${Math.floor(game_data.time / 60) % 10}:${Math.floor(game_data.time % 60 / 10)}${game_data.time % 10} time<br> to draw a ${globals.games[game_data.level][game_data.game]} <br> and lose`;
     table.innerHTML = result;
 }
 
@@ -1181,7 +1100,7 @@ const build_leaderboard = () => {
     closeButton.innerHTML = closeButtonSvg;
 
 
-    const results = JSON.parse(localStorage.getItem("results")).sort((a, b) => a.time - b.time);
+    const results = JSON.parse(localStorage.getItem("results")).sort((a, b) => a.time - b.time) | [];
 
     const rows = [
         { symbol: '★', rank: '1' },
@@ -1292,6 +1211,7 @@ const build_quations = () => {
 build_header()
 build_menu()
 
+if (!localStorage.getItem('copy')) localStorage.setItem('copy', JSON.stringify(game_data));
 
 
 
