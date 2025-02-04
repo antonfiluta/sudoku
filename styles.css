@@ -644,25 +644,25 @@ header button:hover {
           filter: drop-shadow(0px 0px 7px var(--accent-color));
 }
 header button:nth-child(1) {
-  top: -5px;
+  top: 0px;
 }
 header button:nth-child(2) {
-  top: 15px;
+  top: 19px;
 }
 header button:nth-child(3) {
-  top: 25px;
+  top: 29px;
 }
 header button:nth-child(4) {
-  top: 32px;
+  top: 34px;
 }
 header button:nth-child(5) {
-  top: 32px;
+  top: 29px;
 }
 header button:nth-child(6) {
-  top: 25px;
+  top: 19px;
 }
 header button:nth-child(7) {
-  top: 15px;
+  top: 0px;
 }
 
 @media screen and (max-width: 768px) {
