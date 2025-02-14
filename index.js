@@ -858,10 +858,6 @@ const build_game = () => {
                             event.target.innerHTML = "";
                             fill_cell(q, w, e, r, picture, 1);
                         }
-                        const audio = new Audio();
-                        audio.src = "assets/sounds/click1.mp3";
-                        audio.volume = '0.7';
-                        audio.play()
                         event.target.innerHTML = "";
                     })
 
@@ -874,10 +870,6 @@ const build_game = () => {
                             event.target.innerHTML = "x";
                             fill_cell(q, w, e, r, picture, "x");
                         }
-                        const audio = new Audio();
-                        audio.src = "assets/sounds/click2.mp3";
-                        audio.volume = '0.7';
-                        audio.play()
                         event.target.classList.remove("filled");
                     })
 
